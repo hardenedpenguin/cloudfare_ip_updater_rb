@@ -1,0 +1,9 @@
+godaddy-ip-updater (1.0.0-1) unstable; urgency=medium
+
+  * Initial release
+  * Monitors external IP every 3 hours
+  * Automatically updates GoDaddy DNS when IP changes
+  * Systemd service and timer integration
+  * Configuration via /etc/godaddy-ip-updater/config
+
+ -- Jory A. Pratt, W5GLE <geekypenguin@gmail.com>  Sat, 10 Jan 2026 10:10:36 -0600

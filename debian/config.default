@@ -1,0 +1,20 @@
+# GoDaddy IP Updater Configuration
+# Copy this file to /etc/godaddy-ip-updater/config and fill in your values
+# Make sure the config file is readable only by root:
+#   sudo cp /etc/godaddy-ip-updater/config.default /etc/godaddy-ip-updater/config
+#   sudo chmod 600 /etc/godaddy-ip-updater/config
+#   sudo nano /etc/godaddy-ip-updater/config
+
+# Required: Your GoDaddy API credentials
+# Get these from https://developer.godaddy.com/ (Production API, not sandbox)
+GODADDY_API_KEY=your_api_key_here
+GODADDY_API_SECRET=your_api_secret_here
+
+# Required: Your domain name
+GODADDY_DOMAIN=example.com
+
+# Optional: DNS record name (@ for root domain, or subdomain like "home")
+DNS_RECORD_NAME=@
+
+# Optional: DNS record type (usually "A" for IPv4)
+DNS_RECORD_TYPE=A

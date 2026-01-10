@@ -1,0 +1,15 @@
+[Unit]
+Description=GoDaddy IP Updater
+Documentation=man:godaddy-ip-updater(1)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/godaddy-ip-updater
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=godaddy-ip-updater
+
+[Install]
+WantedBy=multi-user.target

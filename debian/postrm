@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+# postrm script for godaddy-ip-updater
+
+case "$1" in
+    remove|purge)
+        # Remove systemd timer and service if they exist
+        if [ -d /run/systemd/system ]; then
+            systemctl stop godaddy-ip-updater.timer >/dev/null 2>&1 || true
+            systemctl stop godaddy-ip-updater.service >/dev/null 2>&1 || true
+            systemctl disable godaddy-ip-updater.timer >/dev/null 2>&1 || true
+            systemctl disable godaddy-ip-updater.service >/dev/null 2>&1 || true
+            systemctl daemon-reload >/dev/null || true
+        fi
+
+        # Optionally remove config file on purge
+        if [ "$1" = "purge" ]; then
+            if [ -f /etc/godaddy-ip-updater/config ]; then
+                echo "Removing /etc/godaddy-ip-updater/config..."
+                rm -f /etc/godaddy-ip-updater/config
+            fi
+            if [ -d /etc/godaddy-ip-updater ] && [ -z "$(ls -A /etc/godaddy-ip-updater)" ]; then
+                rmdir /etc/godaddy-ip-updater
+            fi
+            # Remove data directory only on purge
+            if [ -f /var/lib/godaddy-ip-updater/last_ip.txt ]; then
+                echo "Removing /var/lib/godaddy-ip-updater/last_ip.txt..."
+                rm -f /var/lib/godaddy-ip-updater/last_ip.txt
+            fi
+            if [ -d /var/lib/godaddy-ip-updater ] && [ -z "$(ls -A /var/lib/godaddy-ip-updater)" ]; then
+                rmdir /var/lib/godaddy-ip-updater
+            fi
+        fi
+    ;;
+esac
+
+exit 0

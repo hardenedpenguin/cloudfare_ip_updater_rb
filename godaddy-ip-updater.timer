@@ -1,0 +1,13 @@
+[Unit]
+Description=GoDaddy IP Updater Timer
+Documentation=man:godaddy-ip-updater(1)
+Requires=godaddy-ip-updater.service
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=3h
+AccuracySec=1min
+RandomizedDelaySec=30
+
+[Install]
+WantedBy=timers.target

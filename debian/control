@@ -1,0 +1,20 @@
+Source: godaddy-ip-updater
+Section: net
+Priority: optional
+Maintainer: Jory A. Pratt, W5GLE <geekypenguin@gmail.com>
+Build-Depends: debhelper-compat (= 13), ruby
+Standards-Version: 4.6.0
+Homepage: https://github.com/yourusername/godaddy-ip-updater
+Rules-Requires-Root: binary-targets
+
+Package: godaddy-ip-updater
+Architecture: all
+Depends: ${misc:Depends}, ruby (>= 2.0), systemd
+Description: Automatic DNS updater for GoDaddy domains
+ This tool monitors your external IP address and automatically updates
+ your GoDaddy DNS records when it changes.
+ .
+ The service runs via systemd timer every 3 hours, checking for IP changes
+ and updating the configured DNS record accordingly.
+ .
+ Configuration is stored in /etc/godaddy-ip-updater/config

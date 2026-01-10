@@ -1,0 +1,37 @@
+# Ignore IP storage file
+.godaddy_ip_updater/
+last_ip.txt
+
+# Ignore log files
+*.log
+updater.log
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore environment files with secrets
+.env
+.env.local
+
+# Ruby
+*.gem
+.bundle/
+vendor/
+
+# Debian build artifacts
+debian/godaddy-ip-updater/
+debian/files
+debian/*.substvars
+debian/*.debhelper.log
+../godaddy-ip-updater_*
+*.build
+*.buildinfo
+*.changes
+*.dsc
+*.tar.*
+*.deb
+*.ddeb

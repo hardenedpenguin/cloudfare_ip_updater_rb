@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+# postinst script for godaddy-ip-updater
+
+case "$1" in
+    configure)
+        # Create config file if it doesn't exist
+        if [ ! -f /etc/godaddy-ip-updater/config ]; then
+            cp /etc/godaddy-ip-updater/config.default /etc/godaddy-ip-updater/config
+            chmod 600 /etc/godaddy-ip-updater/config
+            echo "Configuration file created at /etc/godaddy-ip-updater/config"
+            echo "Please edit it with your GoDaddy API credentials before enabling the service."
+        fi
+
+        # Set proper permissions on data directory
+        if [ -d /var/lib/godaddy-ip-updater ]; then
+            chown root:root /var/lib/godaddy-ip-updater
+            chmod 755 /var/lib/godaddy-ip-updater
+        fi
+
+        # Reload systemd if needed
+        if [ -d /run/systemd/system ]; then
+            systemctl daemon-reload >/dev/null || true
+        fi
+
+        echo ""
+        echo "GoDaddy IP Updater has been installed."
+        echo ""
+        echo "Next steps:"
+        echo "1. Edit /etc/godaddy-ip-updater/config with your GoDaddy API credentials"
+        echo "2. Enable the service and timer:"
+        echo "   sudo systemctl enable godaddy-ip-updater.service"
+        echo "   sudo systemctl enable --now godaddy-ip-updater.timer"
+        echo "3. Check status:"
+        echo "   sudo systemctl status godaddy-ip-updater.timer"
+        echo ""
+    ;;
+esac
+
+exit 0
