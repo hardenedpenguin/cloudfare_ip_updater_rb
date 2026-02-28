@@ -12,15 +12,35 @@
 #   - Zone:DNS:Edit
 CLOUDFLARE_API_TOKEN=your_api_token_here
 
-# Required: Your domain name
-DOMAIN=example.com
+# ---------------------------------------------------------------------------
+# Optional settings
+# ---------------------------------------------------------------------------
+# CHECK_INTERVAL=180         # Check interval in minutes (default: 180 = 3 hours)
+# RETRY_ATTEMPTS=3           # Retry attempts for API/IP checks (default: 3)
+# VERIFY_DNS=0               # Verify DNS propagation after update (1/0, default: 0)
+#
+# After changing CHECK_INTERVAL, run: sudo cloudflare-ip-updater --setup-timer
+# ---------------------------------------------------------------------------
 
-# Optional: DNS record name (@ for root domain, or subdomain like "home")
-DNS_RECORD_NAME=@
+# ---------------------------------------------------------------------------
+# Multi-record mode: Add RECORD lines for each DNS record to update.
+# Format: RECORD=domain:record_name:type
+#   - domain: your domain (e.g., example.com)
+#   - record_name: @ for root, or subdomain (e.g., home, vpn)
+#   - type: A (IPv4) or AAAA (IPv6)
+#
+# Examples:
+# RECORD=example.com:@:A
+# RECORD=example.com:@:AAAA
+# RECORD=example.com:home:A
+# RECORD=example.com:home:AAAA
+# RECORD=other.com:vpn:A
+# ---------------------------------------------------------------------------
+RECORD=example.com:@:A
 
-# Optional: DNS record type (usually "A" for IPv4)
-DNS_RECORD_TYPE=A
-
-# Optional: Zone ID and DNS Record ID (will be auto-detected if not provided)
-# CLOUDFLARE_ZONE_ID=your_zone_id_here
-# CLOUDFLARE_DNS_RECORD_ID=your_record_id_here
+# ---------------------------------------------------------------------------
+# Legacy single-record mode (used only if no RECORD lines above):
+# ---------------------------------------------------------------------------
+# DOMAIN=example.com
+# DNS_RECORD_NAME=@
+# DNS_RECORD_TYPE=A

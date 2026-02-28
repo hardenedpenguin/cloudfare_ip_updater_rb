@@ -1,3 +1,15 @@
+cloudflare-ip-updater (1.1.0-1) unstable; urgency=medium
+
+  * Multi-record and multi-domain support (RECORD=domain:name:type)
+  * IPv6 (AAAA) record support with dedicated IPv6 IP check services
+  * Retry logic with exponential backoff for transient failures
+  * Rate limit handling (429 responses with Retry-After)
+  * Dry-run mode (--dry-run) to test without making changes
+  * Configurable check interval (CHECK_INTERVAL + --setup-timer)
+  * Optional DNS propagation verification (VERIFY_DNS=1)
+
+ -- Jory A. Pratt, W5GLE <geekypenguin@gmail.com>  Sat, 28 Feb 2026 08:33:42 -0600
+
 cloudflare-ip-updater (1.0.0-1) unstable; urgency=medium
 
   * Initial release
